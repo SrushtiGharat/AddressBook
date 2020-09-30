@@ -61,6 +61,17 @@ namespace AddressBook
                 }
             }
         }
+        public void RemoveContact(string name)
+        {
+            foreach(Contacts c in contactList)
+            {
+                if (c.firstName.Equals(name))
+                {
+                    contactList.Remove(c);
+                    return;
+                }
+            }
+        }
         public bool checkName(string firstName)
         {
             foreach(Contacts c in contactList)
@@ -72,17 +83,19 @@ namespace AddressBook
             }
             return false;
         }
+
     }
     class Program
     {
         static void Main(string[] args)
         {
+            string name = "";
             AddressBook addressBook = new AddressBook();
             string[] details;
             Console.WriteLine("Welcome to Address Book Program");
             while (true)
             {
-                Console.WriteLine("1.Add Contact\n2.Edit Contact\n");
+                Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
@@ -99,7 +112,8 @@ namespace AddressBook
                         break;
                     case 2:
                         Console.WriteLine("Enter the name to edit");
-                        string name = Console.ReadLine();
+                        name = Console.ReadLine();
+                        
                         if (addressBook.checkName(name) == true)
                         {
                             Console.WriteLine("Enter the following details separated by comma");
@@ -113,7 +127,23 @@ namespace AddressBook
                             Console.WriteLine("No such contact found");
                         }
                         break;
-               }
+                    case 3:
+                        Console.WriteLine("Enter the name to be removed");
+                        name = Console.ReadLine();
+                        if (addressBook.checkName(name) == true)
+                        {
+                            addressBook.RemoveContact(name);
+                            Console.WriteLine("Contact Removed Successfully");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No such contact found");
+                        }
+                        break;
+                    case 4:
+                        Environment.Exit(0);
+                        break;
+                }
             }
         }
     }
