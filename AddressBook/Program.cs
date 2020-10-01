@@ -4,93 +4,13 @@ using System.Security.Cryptography;
 
 namespace AddressBook
 {
-    class Contacts
-    {
-        public string firstName, lastName, address, city, state, zipCode, phoneNo, eMail;
-
-        public Contacts()
-        {
-            firstName = "";
-            lastName = "";
-            address = "";
-            city = "";
-            state = "";
-            zipCode = "";
-            phoneNo = "";
-            eMail = "";
-        }
-        public Contacts(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
-            this.city = city;
-            this.state = state;
-            this.zipCode = zipCode;
-            this.phoneNo = phoneNo;
-            this.eMail = eMail;
-        }
-
-    }
-    class AddressBook
-    {
-        List<Contacts> contactList;
-        public AddressBook()
-        {
-            contactList = new List<Contacts>();
-        }
-        public void addContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
-        {
-            Contacts contact = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNo, eMail);
-            contactList.Add(contact);
-        }
-        public void editContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
-        {
-            foreach (Contacts c in contactList)
-            {
-                if (c.firstName.Equals(firstName))
-                {   
-                    c.lastName = lastName;
-                    c.address = address;
-                    c.city = city;
-                    c.state = state;
-                    c.zipCode = zipCode;
-                    c.phoneNo = phoneNo;
-                    c.eMail = eMail;
-                    return;
-                }
-            }
-        }
-        public void RemoveContact(string name)
-        {
-            foreach(Contacts c in contactList)
-            {
-                if (c.firstName.Equals(name))
-                {
-                    contactList.Remove(c);
-                    return;
-                }
-            }
-        }
-        public bool checkName(string firstName)
-        {
-            foreach(Contacts c in contactList)
-            {
-                if (c.firstName.Equals(firstName))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-    }
+    
     class Program
     {
         static void Main(string[] args)
         {
             string name = "";
-            AddressBook addressBook = new AddressBook();
+            Address_Book addressBook = new Address_Book();
             
             string[] details;
             Console.WriteLine("Welcome to Address Book Program");
