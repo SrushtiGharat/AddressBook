@@ -22,7 +22,7 @@ namespace AddressBook
             while (true)
             {   
                 
-                Console.WriteLine("1.Add Address Book\n2.Open Address Book\n3.Search a person");
+                Console.WriteLine("1.Add Address Book\n2.Open Address Book");
                 choice = Convert.ToInt32(Console.ReadLine());
                
                 switch(choice)
@@ -45,14 +45,6 @@ namespace AddressBook
                             flag = false;
                         }
                         break;
-                    case 3:
-                        Console.WriteLine("Enter name of the person");
-                        name = Console.ReadLine().Split(" ");
-                        Console.WriteLine("Enter City or State");
-                        string cityOrState = Console.ReadLine();
-                        multipleAddressBooks.searchPersonOverMultipleAddressBook(name[0], name[1], cityOrState);
-
-                        break;
                     default:
                         flag = false;
                         Console.WriteLine("Invalid Choice");
@@ -63,7 +55,7 @@ namespace AddressBook
                 while (flag)
                 {
                     
-                    Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Exit");
+                    Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Search Person By City Or State\n5.Exit");
                     choice = Convert.ToInt32(Console.ReadLine());
 
                     switch (choice)
@@ -107,7 +99,15 @@ namespace AddressBook
                                 Console.WriteLine("No such contact found");
                             }
                             break;
+
                         case 4:
+                            Console.WriteLine("Enter City or State");
+                            string cityOrState = Console.ReadLine();
+                            
+                            multipleAddressBooks.SearchPersonOverMultipleAddressBook(cityOrState);
+                            break;
+                       
+                        case 5:
                             flag = false;
                             break;
                         default:

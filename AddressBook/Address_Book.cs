@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBook
@@ -8,9 +9,11 @@ namespace AddressBook
     {
         List<Contacts> contactList;
         
+
         public Address_Book()
         {
             contactList = new List<Contacts>();
+            
         }
         public string AddContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
         {
@@ -35,6 +38,7 @@ namespace AddressBook
                     c.zipCode = zipCode;
                     c.phoneNo = phoneNo;
                     c.eMail = eMail;
+                   
                     return;
                 }
             }
@@ -46,6 +50,7 @@ namespace AddressBook
                 if (c.firstName.Equals(firstName) && c.lastName.Equals(lastName))
                 {
                     contactList.Remove(c);
+                    
                     return;
                 }
             }
@@ -61,17 +66,16 @@ namespace AddressBook
             }
             return false;
         }
-        public Contacts SearchPerson(string firstName,string lastName,string cityOrState)
+        public void SearchContactByCityOrState(string cityOrState)
         {
-            
-            foreach (Contacts c in contactList)
+           
+            foreach(var contact in contactList)
             {
-                if (c.firstName.Equals(firstName) && c.lastName.Equals(lastName)&&(c.city.Equals(cityOrState) || c.state.Equals(cityOrState)))
+                if (contact.city == cityOrState || contact.state == cityOrState)
                 {
-                   return c; 
+                    Console.WriteLine("Name :" + contact.firstName + " " + contact.lastName + "\nAddress :" + contact.address + "   ZipCode :" + contact.zipCode + "\nPhone No :" + contact.phoneNo + "   Email :" + contact.eMail);
                 }
             }
-            return null;
            
         }
         
