@@ -13,6 +13,7 @@ namespace AddressBook
             int choice = 0;
             string[] details;
             bool flag = true;
+            string addBookName = "";
 
             MultipleAddressBooks multipleAddressBooks = new MultipleAddressBooks();
             Address_Book addressBook = null;
@@ -21,33 +22,43 @@ namespace AddressBook
             while (true)
             {   
                 
-                Console.WriteLine("1.Add Address Book\n2.Open Address Book");
+                Console.WriteLine("1.Add Address Book\n2.Open Address Book\n3.Search a person");
                 choice = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Enter name of Address Book");
-                string addBookName = Console.ReadLine();
-                if (choice ==1)
+               
+                switch(choice)
                 {
-                    multipleAddressBooks.AddAddressBook(addBookName);
-                    addressBook = multipleAddressBooks.GetAddressBook(addBookName);
-                    flag = true;
-                    
-                }
-                else if (choice == 2)
-                {
-                    addressBook = multipleAddressBooks.GetAddressBook(addBookName);
-                    flag = true;
-                    if (addressBook == null)
-                    {
-                        Console.WriteLine("No such Address Book");
-                        flag = false;
-                    }
+                    case 1:
+                        Console.WriteLine("Enter name of Address Book");
+                        addBookName = Console.ReadLine();
+                        multipleAddressBooks.AddAddressBook(addBookName);
+                        addressBook = multipleAddressBooks.GetAddressBook(addBookName);
+                        flag = true;
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter name of Address Book");
+                        addBookName = Console.ReadLine();
+                        addressBook = multipleAddressBooks.GetAddressBook(addBookName);
+                        flag = true;
+                        if (addressBook == null)
+                        {
+                            Console.WriteLine("No such Address Book");
+                            flag = false;
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter name of the person");
+                        name = Console.ReadLine().Split(" ");
+                        Console.WriteLine("Enter City or State");
+                        string cityOrState = Console.ReadLine();
+                        multipleAddressBooks.searchPersonOverMultipleAddressBook(name[0], name[1], cityOrState);
 
+                        break;
+                    default:
+                        flag = false;
+                        Console.WriteLine("Invalid Choice");
+                        break;
                 }
-                else
-                {
-                    Console.WriteLine("Invalid choice");
-                    flag = false;
-                }
+                
 
                 while (flag)
                 {
@@ -59,7 +70,7 @@ namespace AddressBook
                     {
                         case 1:
                             Console.WriteLine("Enter the details separated by comma");
-                            Console.WriteLine("First Name, Last Name, Address, City, State, ZipCode, Email");
+                            Console.WriteLine("First Name, Last Name, Address, City, State, ZipCode,Phone No Email");
                             details = Console.ReadLine().Split(",");
 
                             string message = addressBook.AddContact(details[0], details[1], details[2], details[3], details[4], details[5], details[6], details[7]);
@@ -73,7 +84,7 @@ namespace AddressBook
                             if (addressBook.CheckName(name[0],name[1]) == true)
                             {
                                 Console.WriteLine("Enter the following details separated by comma");
-                                Console.WriteLine("FirstName,LastName,Address, City, State, ZipCode, Email");
+                                Console.WriteLine("FirstName,LastName,Address, City, State, ZipCode,Phone No Email");
                                 details = Console.ReadLine().Split(",");
                                 addressBook.EditContact(details[0], details[1], details[2], details[3], details[4], details[5],details[6],details[7]);
                                 Console.WriteLine("Details editted successfully");

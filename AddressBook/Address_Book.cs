@@ -61,6 +61,19 @@ namespace AddressBook
             }
             return false;
         }
+        public Contacts SearchPerson(string firstName,string lastName,string cityOrState)
+        {
+            
+            foreach (Contacts c in contactList)
+            {
+                if (c.firstName.Equals(firstName) && c.lastName.Equals(lastName)&&(c.city.Equals(cityOrState) || c.state.Equals(cityOrState)))
+                {
+                   return c; 
+                }
+            }
+            return null;
+           
+        }
         
     }
 }
