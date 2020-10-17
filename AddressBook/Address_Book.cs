@@ -12,12 +12,17 @@ namespace AddressBook
         {
             contactList = new List<Contacts>();
         }
-        public void addContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
+        public string AddContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
         {
-            Contacts contact = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNo, eMail);
-            contactList.Add(contact);
+            if (CheckName(firstName, lastName) == false)
+            {
+                Contacts contact = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNo, eMail);
+                contactList.Add(contact);
+                return "Details Added Successfully";
+            }
+            return "Name already exists";
         }
-        public void editContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
+        public void EditContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
         {
             foreach (Contacts c in contactList)
             {
@@ -34,27 +39,28 @@ namespace AddressBook
                 }
             }
         }
-        public void RemoveContact(string name)
+        public void RemoveContact(string firstName,string lastName)
         {
             foreach (Contacts c in contactList)
             {
-                if (c.firstName.Equals(name))
+                if (c.firstName.Equals(firstName) && c.lastName.Equals(lastName))
                 {
                     contactList.Remove(c);
                     return;
                 }
             }
         }
-        public bool checkName(string firstName)
+        public bool CheckName(string firstName,string lastName)
         {
             foreach (Contacts c in contactList)
             {
-                if (c.firstName.Equals(firstName))
+                if (c.firstName.Equals(firstName) && c.lastName.Equals(lastName))
                 {
                     return true;
                 }
             }
             return false;
         }
+        
     }
 }
