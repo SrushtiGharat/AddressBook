@@ -55,7 +55,7 @@ namespace AddressBook
                 while (flag)
                 {
                     
-                    Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Search Person By City Or State\n5.Exit");
+                    Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.View Person By City\n5.View Person By State\n6.Exit");
                     choice = Convert.ToInt32(Console.ReadLine());
 
                     switch (choice)
@@ -68,6 +68,7 @@ namespace AddressBook
                             string message = addressBook.AddContact(details[0], details[1], details[2], details[3], details[4], details[5], details[6], details[7]);
 
                             Console.WriteLine(message);
+                            
                             break;
                         case 2:
                             Console.WriteLine("Enter the name to edit");
@@ -101,19 +102,31 @@ namespace AddressBook
                             break;
 
                         case 4:
-                            Console.WriteLine("Enter City or State");
-                            string cityOrState = Console.ReadLine();
-                            
-                            multipleAddressBooks.SearchPersonOverMultipleAddressBook(cityOrState);
+                            Console.WriteLine("Enter City");
+                            string city = Console.ReadLine();
+                            multipleAddressBooks.SetContactByCityDictionary();
+
+                            multipleAddressBooks.ViewPersonsByCity(city);
+                            break;
+                        case 5:
+                            Console.WriteLine("Enter State");
+                            string state = Console.ReadLine();
+
+                            multipleAddressBooks.SetContactByStateDictionary();
+                            multipleAddressBooks.ViewPersonsByState(state);
                             break;
                        
-                        case 5:
+                        case 6:
                             flag = false;
                             break;
                         default:
                             break;
                     }
+
                 }
+                
+                
+
             }
         }
     }
