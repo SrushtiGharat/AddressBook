@@ -25,7 +25,15 @@ namespace AddressBook
         public void AddAddressBook(string name)
         {
             Address_Book addressBook = new Address_Book();
-            addressBooksCollection.Add(name, addressBook);
+            if (addressBooksCollection.ContainsKey(name)==false)
+            {
+                addressBooksCollection.Add(name, addressBook);
+                Console.WriteLine("Address Book Added Successfully");
+            }
+            else
+            {
+                Console.WriteLine("Address Book Already Exist");
+            }
 
         }
         public Address_Book GetAddressBook(string name)
