@@ -15,8 +15,9 @@ namespace AddressBook
 
             while (flag)
             {
-
-                Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Sort By Name\n5.Exit");
+                Console.WriteLine("------------------------------------------------------------------------");
+                Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Sort By Name\n5.Sort By City\n6.Sort By State\n7.Sort By ZipCode\n8.Exit");
+                Console.WriteLine("------------------------------------------------------------------------");
                 choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
@@ -65,6 +66,15 @@ namespace AddressBook
                         addressBook.SortByName();
                         break;
                     case 5:
+                        addressBook.SortByCity();
+                        break;
+                    case 6:
+                        addressBook.SortByState();
+                        break;
+                    case 7:
+                        addressBook.SortByZipCode();
+                        break;
+                    case 8:
                         flag = false;
                         break;
                     default:
