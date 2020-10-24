@@ -30,5 +30,9 @@ namespace AddressBook
             this.phoneNo = phoneNo;
             this.eMail = eMail;
         }
+        public override string ToString()
+        {
+            return "Name :" + firstName + " " + lastName + "\nAddress :" + address + "   ZipCode :" + zipCode + "\nPhone No :" + phoneNo + "   Email :" + eMail;
+        }
     }
 }

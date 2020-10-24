@@ -58,25 +58,30 @@ namespace AddressBook
         }
         public bool CheckName(string firstName, string lastName)
         {
-            foreach (Contacts c in contactList)
+            
+            foreach(Contacts contact in contactList.FindAll(e => e.firstName.Equals(firstName) && e.lastName.Equals(lastName)))
             {
-                if (c.firstName.Equals(firstName) && c.lastName.Equals(lastName))
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }
         public List<Contacts> GetPersonByCityOrState(string cityOrState)
         {
             List<Contacts> contact = new List<Contacts>();
-            foreach(Contacts c in contactList)
+            foreach(Contacts c in contactList.FindAll(e => e.city.Equals(cityOrState) || e.state.Equals(cityOrState)))
             {
-                if (c.city.Equals(cityOrState) || c.state.Equals(cityOrState))
                     contact.Add(c);
-                
             }
             return contact;
+        }
+        public void SortByName()
+        {
+            contactList.Sort((contact1,contact2)=>contact1.firstName.CompareTo(contact2.firstName));
+            foreach(Contacts c in contactList)
+            {
+                Console.WriteLine(c.ToString());
+            }
+            
         }
         
 
