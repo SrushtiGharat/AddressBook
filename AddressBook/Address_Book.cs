@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,7 +13,7 @@ namespace AddressBook
     {
         public List<Contacts> contactList;
         string path = @"C:\Users\Gharat\source\repos\AddressBook\Address Book Contacts.txt";
-
+        string csvPath = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookContacts.csv";
         public Address_Book()
         {
             contactList = new List<Contacts>();
@@ -31,15 +33,15 @@ namespace AddressBook
         {
             foreach (Contacts c in contactList)
             {
-                if (c.firstName.Equals(firstName))
+                if (c.FirstName.Equals(firstName))
                 {
-                    c.lastName = lastName;
-                    c.address = address;
-                    c.city = city;
-                    c.state = state;
-                    c.zipCode = zipCode;
-                    c.phoneNo = phoneNo;
-                    c.eMail = eMail;
+                    c.LastName = lastName;
+                    c.Address = address;
+                    c.City = city;
+                    c.State = state;
+                    c.ZipCode = zipCode;
+                    c.PhoneNo = phoneNo;
+                    c.EMail = eMail;
                    
                     return;
                 }
@@ -49,7 +51,7 @@ namespace AddressBook
         {
             foreach (Contacts c in contactList)
             {
-                if (c.firstName.Equals(firstName) && c.lastName.Equals(lastName))
+                if (c.FirstName.Equals(firstName) && c.LastName.Equals(lastName))
                 {
                     contactList.Remove(c);
                     
@@ -60,7 +62,7 @@ namespace AddressBook
         public bool CheckName(string firstName, string lastName)
         {
             
-            foreach(Contacts contact in contactList.FindAll(e => e.firstName.Equals(firstName) && e.lastName.Equals(lastName)))
+            foreach(Contacts contact in contactList.FindAll(e => e.FirstName.Equals(firstName) && e.LastName.Equals(lastName)))
             {
                 return true;
             }
@@ -69,7 +71,7 @@ namespace AddressBook
         public List<Contacts> GetPersonByCityOrState(string cityOrState)
         {
             List<Contacts> contact = new List<Contacts>();
-            foreach(Contacts c in contactList.FindAll(e => e.city.Equals(cityOrState) || e.state.Equals(cityOrState)))
+            foreach(Contacts c in contactList.FindAll(e => e.City.Equals(cityOrState) || e.State.Equals(cityOrState)))
             {
                     contact.Add(c);
             }
@@ -77,7 +79,7 @@ namespace AddressBook
         }
         public void SortByName()
         {
-            contactList.Sort((contact1,contact2)=>contact1.firstName.CompareTo(contact2.firstName));
+            contactList.Sort((contact1,contact2)=>contact1.FirstName.CompareTo(contact2.FirstName));
             foreach(Contacts c in contactList)
             {
                 Console.WriteLine(c.ToString());
@@ -86,7 +88,7 @@ namespace AddressBook
         }
         public void SortByCity()
         {
-            contactList.Sort((contact1, contact2) => contact1.city.CompareTo(contact2.city));
+            contactList.Sort((contact1, contact2) => contact1.City.CompareTo(contact2.City));
             foreach (Contacts c in contactList)
             {
                 Console.WriteLine(c.ToString());
@@ -95,7 +97,7 @@ namespace AddressBook
         }
         public void SortByState()
         {
-            contactList.Sort((contact1, contact2) => contact1.state.CompareTo(contact2.state));
+            contactList.Sort((contact1, contact2) => contact1.State.CompareTo(contact2.State));
             foreach (Contacts c in contactList)
             {
                 Console.WriteLine(c.ToString());
@@ -104,7 +106,7 @@ namespace AddressBook
         }
         public void SortByZipCode()
         {
-            contactList.Sort((contact1, contact2) => contact1.zipCode.CompareTo(contact2.zipCode));
+            contactList.Sort((contact1, contact2) => contact1.ZipCode.CompareTo(contact2.ZipCode));
             foreach (Contacts c in contactList)
             {
                 Console.WriteLine(c.ToString());
@@ -113,20 +115,21 @@ namespace AddressBook
         }
         public void WriteToFile(string addressBookName)
         {
-            if (FileExitsts())
+            if (FileExitsts(path))
             {
                 int count = 0;
-                Console.WriteLine(addressBookName + ":");
+                
                 using (StreamWriter sr = File.AppendText(path))
                 {
-                    
-                    foreach(Contacts c in contactList)
+                    sr.WriteLine(addressBookName + ":");
+                    foreach (Contacts c in contactList)
                     {
                         sr.WriteLine(++count +" "+ c.ToString()+"\n");
                         
                     }
                     sr.Close();
-                } 
+                }
+                Console.WriteLine("Written to file successfully");
             }
             else
             {
@@ -136,7 +139,7 @@ namespace AddressBook
         }
         public void ReadFromFile()
         {
-            if (FileExitsts())
+            if (FileExitsts(path))
             {
                 using (StreamReader sr = File.OpenText(path))
                 {
@@ -149,13 +152,58 @@ namespace AddressBook
                
             }
         }
+        public void WriteToCSV()
+        {
+            if (FileExitsts(csvPath))
+            {
+                using (var writer = new StreamWriter(csvPath))
+                using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csvExport.WriteRecords(contactList);
+                }
+                Console.WriteLine("Records Added Successfully");
+            }
+            else
+            {
+                Console.WriteLine("File does not exist");
+            }
+        }
+        public void ReadFromCSV()
+        {
+            if (FileExitsts(csvPath))
+            {
+                using (var reader = new StreamReader(csvPath))
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                {
+                    var records = csv.GetRecords<Contacts>().ToList();
+                    Console.WriteLine("Data reading done successfully");
+                    foreach (Contacts contacts in records)
+                    {
+                        Console.Write("\t" + contacts.FirstName);
+                        Console.Write("\t" + contacts.LastName);
+                        Console.Write("\t" + contacts.Address);
+                        Console.Write("\t" + contacts.City);
+                        Console.Write("\t" + contacts.State);
+                        Console.Write("\t" + contacts.ZipCode);
+                        Console.Write("\t" + contacts.PhoneNo);
+                        Console.Write("\t" + contacts.EMail);
+                        Console.Write("\n");
+
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No such file found");
+            }
+        }
         public void ClearFile()
         {
             File.WriteAllText(path, string.Empty);
         }
-        public bool FileExitsts()
+        public bool FileExitsts(string filePath)
         {
-            if (File.Exists(path))
+            if (File.Exists(filePath))
                 return true;
             return false;
         }

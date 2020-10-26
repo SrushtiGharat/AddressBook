@@ -6,33 +6,43 @@ namespace AddressBook
 {
     class Contacts
     {
-        public string firstName, lastName, address, city, state, zipCode, phoneNo, eMail;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string PhoneNo { get; set; }
+        public string EMail { get; set; }
+
+
+
 
         public Contacts()
         {
-            firstName = "";
-            lastName = "";
-            address = "";
-            city = "";
-            state = "";
-            zipCode = "";
-            phoneNo = "";
-            eMail = "";
+            FirstName = "";
+            LastName = "";
+            Address = "";
+            City = "";
+            State = "";
+            ZipCode = "";
+            PhoneNo = "";
+            EMail = "";
         }
         public Contacts(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
-            this.city = city;
-            this.state = state;
-            this.zipCode = zipCode;
-            this.phoneNo = phoneNo;
-            this.eMail = eMail;
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            City = city;
+            State = state;
+            ZipCode = zipCode;
+            PhoneNo = phoneNo;
+            EMail = eMail;
         }
         public override string ToString()
         {
-            return "Name :" + firstName + " " + lastName + "\nAddress :" + address + "   ZipCode :" + zipCode + "\nPhone No :" + phoneNo + "   Email :" + eMail;
+            return "Name :" + FirstName + " " + LastName + "\nAddress :" + Address +" \nCity :"+City+"  State :"+State+"   ZipCode :" + ZipCode + "\nPhone No :" + PhoneNo + "   Email :" + EMail;
         }
     }
 }

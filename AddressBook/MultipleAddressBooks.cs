@@ -50,13 +50,13 @@ namespace AddressBook
             {
                 foreach (var contact in addressBook.Value.contactList)
                 {
-                    if (cities.Contains(contact.city) == false)
+                    if (cities.Contains(contact.City) == false)
                     {
-                        cities.Add(contact.city);
+                        cities.Add(contact.City);
                     }
-                    if (states.Contains(contact.state) == false)
+                    if (states.Contains(contact.State) == false)
                     {
-                        states.Add(contact.state);
+                        states.Add(contact.State);
                     }
 
                 }
