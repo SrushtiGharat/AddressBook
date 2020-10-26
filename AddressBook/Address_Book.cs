@@ -111,11 +111,12 @@ namespace AddressBook
             }
 
         }
-        public void WriteToFile()
+        public void WriteToFile(string addressBookName)
         {
             if (FileExitsts())
             {
                 int count = 0;
+                Console.WriteLine(addressBookName + ":");
                 using (StreamWriter sr = File.AppendText(path))
                 {
                     
@@ -133,6 +134,21 @@ namespace AddressBook
             }
 
         }
+        public void ReadFromFile()
+        {
+            if (FileExitsts())
+            {
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    String s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
+               
+            }
+        }
         public void ClearFile()
         {
             File.WriteAllText(path, string.Empty);
@@ -143,6 +159,6 @@ namespace AddressBook
                 return true;
             return false;
         }
-
+        
     }
 }
