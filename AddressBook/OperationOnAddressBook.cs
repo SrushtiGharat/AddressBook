@@ -12,7 +12,7 @@ namespace AddressBook
             int choice = 0;
             string[] details;
             bool flag = true;
-
+            ReadOrWriteToFile rw = new ReadOrWriteToFile();
             while (flag)
             {
                 Console.WriteLine("------------------------------------------------------------------------");
@@ -75,19 +75,19 @@ namespace AddressBook
                         addressBook.SortByZipCode();
                         break;
                     case 8:
-                        addressBook.ClearFile();
-                        addressBook.WriteToFile(addressBookName);
+                        rw.ClearFile();
+                        rw.WriteToFile(addressBookName,addressBook.contactList);
                         
                         break;
                     case 9:
-                        addressBook.ReadFromFile();
+                        rw.ReadFromFile();
                         break;
                     case 10:
-                        addressBook.WriteToCSV();
+                        rw.WriteToCSV(addressBook.contactList);
                         
                         break;
                     case 11:
-                        addressBook.ReadFromCSV();
+                        rw.ReadFromCSV();
                         break;
                     case 12:
                         flag = false;

@@ -1,11 +1,11 @@
 Add1:
-1 Name :Srushti Gharat
-Address :Mumbai 
-City :Mumbai  State :MH   ZipCode :400050
-Phone No :9999999999   Email :srushti@gmail.com
+1 Name :Ram Singh
+Address :Bandra 
+City :Mumbai  State :Maharashtra   ZipCode :400500
+Phone No :8888888888   Email :ram@gmail.com
 
 2 Name :Seeta Singh
 Address :Bangalore 
-City :Bangalore  State :Karnataka   ZipCode :500300
-Phone No :6666666666   Email :seeta@gmail.com
+City :Bangalore  State :Karnataka   ZipCode :500400
+Phone No :9999999999   Email :seeta@gmail.com
 
