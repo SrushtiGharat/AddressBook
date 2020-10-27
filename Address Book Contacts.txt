@@ -1,11 +1,16 @@
-Add1:
+AddressBook1:
 1 Name :Ram Singh
-Address :Bandra 
-City :Mumbai  State :Maharashtra   ZipCode :400500
-Phone No :8888888888   Email :ram@gmail.com
+Address :Andheri 
+City :Mumbai  State :Maharashtra   ZipCode :400050
+Phone No :9999999999   Email :ram@gmail.com
 
-2 Name :Seeta Singh
+2 Name :Seeta Pandey
 Address :Bangalore 
-City :Bangalore  State :Karnataka   ZipCode :500400
-Phone No :9999999999   Email :seeta@gmail.com
+City :Bangalore  State :Karnataka   ZipCode :500043
+Phone No :8888888888   Email :seeta@gmail.com
+
+3 Name :Neha Kumar
+Address :Bandra 
+City :Mumbai  State :Maharashtra   ZipCode :400060
+Phone No :7777777777   Email :rekha@gmail.com
 
