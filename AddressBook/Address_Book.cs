@@ -12,11 +12,26 @@ namespace AddressBook
     class Address_Book
     {
         public List<Contacts> contactList;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Address_Book()
         {
             contactList = new List<Contacts>();
             
         }
+        /// <summary>
+        /// Add a new Contact to Address Book
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="address"></param>
+        /// <param name="city"></param>
+        /// <param name="state"></param>
+        /// <param name="zipCode"></param>
+        /// <param name="phoneNo"></param>
+        /// <param name="eMail"></param>
+        /// <returns></returns>
         public string AddContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
         {
             if (CheckName(firstName, lastName) == false)
@@ -27,6 +42,17 @@ namespace AddressBook
             }
             return "Name already exists";
         }
+        /// <summary>
+        /// Edit a already existing contact in Address Book
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="address"></param>
+        /// <param name="city"></param>
+        /// <param name="state"></param>
+        /// <param name="zipCode"></param>
+        /// <param name="phoneNo"></param>
+        /// <param name="eMail"></param>
         public void EditContact(string firstName, string lastName, string address, string city, string state, string zipCode, string phoneNo, string eMail)
         {
             foreach (Contacts c in contactList)
@@ -45,6 +71,11 @@ namespace AddressBook
                 }
             }
         }
+        /// <summary>
+        /// Remove a contact from address book
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
         public void RemoveContact(string firstName,string lastName)
         {
             foreach (Contacts c in contactList)
@@ -57,6 +88,12 @@ namespace AddressBook
                 }
             }
         }
+        /// <summary>
+        /// Check if a name is present in address book
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <returns>Returns true if present else false</returns>
         public bool CheckName(string firstName, string lastName)
         {
             
@@ -66,6 +103,11 @@ namespace AddressBook
             }
             return false;
         }
+        /// <summary>
+        /// Get a list of contacts in address book by city or set
+        /// </summary>
+        /// <param name="cityOrState"></param>
+        /// <returns>List Of Contacts</returns>
         public List<Contacts> GetPersonByCityOrState(string cityOrState)
         {
             List<Contacts> contact = new List<Contacts>();
@@ -75,6 +117,9 @@ namespace AddressBook
             }
             return contact;
         }
+        /// <summary>
+        /// Sort the contacts in address book by name
+        /// </summary>
         public void SortByName()
         {
             contactList.Sort((contact1,contact2)=>contact1.FirstName.CompareTo(contact2.FirstName));
@@ -84,6 +129,9 @@ namespace AddressBook
             }
             
         }
+        /// <summary>
+        /// Sort the contacts in address book by city
+        /// </summary>
         public void SortByCity()
         {
             contactList.Sort((contact1, contact2) => contact1.City.CompareTo(contact2.City));
@@ -93,6 +141,9 @@ namespace AddressBook
             }
 
         }
+        /// <summary>
+        /// Sort the contacts in address book by state
+        /// </summary>
         public void SortByState()
         {
             contactList.Sort((contact1, contact2) => contact1.State.CompareTo(contact2.State));
@@ -102,6 +153,9 @@ namespace AddressBook
             }
 
         }
+        /// <summary>
+        /// Sort the contacts in address book by ZipCode
+        /// </summary>
         public void SortByZipCode()
         {
             contactList.Sort((contact1, contact2) => contact1.ZipCode.CompareTo(contact2.ZipCode));

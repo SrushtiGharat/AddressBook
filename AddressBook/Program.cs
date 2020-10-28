@@ -7,6 +7,10 @@ namespace AddressBook
 
     class Program
     {
+        /// <summary>
+        /// Manage multiple address books
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
 

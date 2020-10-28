@@ -6,6 +6,11 @@ namespace AddressBook
 {
     class OperationOnAddressBook
     {
+        /// <summary>
+        /// Add, Edit, Delete,Sort and Write the contacts in a address book
+        /// </summary>
+        /// <param name="addressBook"></param>
+        /// <param name="addressBookName"></param>
         public void EditAddOrDeleteContact(Address_Book addressBook,string addressBookName)
         {
             string[] name;

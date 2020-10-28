@@ -15,6 +15,12 @@ namespace AddressBook
         string path = @"C:\Users\Gharat\source\repos\AddressBook\Address Book Contacts.txt";
         string csvPath = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookContacts.csv";
         string jsonPath = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookDetails.json";
+
+        /// <summary>
+        /// Write contacts in address book to a txt file
+        /// </summary>
+        /// <param name="addressBookName"></param>
+        /// <param name="contactList"></param>
         public void WriteToFile(string addressBookName,List<Contacts> contactList)
         {
             if (FileExitsts(path))
@@ -39,6 +45,9 @@ namespace AddressBook
             }
 
         }
+        /// <summary>
+        /// Read contacts from txt file
+        /// </summary>
         public void ReadFromFile()
         {
             if (FileExitsts(path))
@@ -54,6 +63,10 @@ namespace AddressBook
 
             }
         }
+        /// <summary>
+        /// Write contacts in address book to a .csv file
+        /// </summary>
+        /// <param name="contactList"></param>
         public void WriteToCSV(List<Contacts> contactList)
         {
             if (FileExitsts(csvPath))
@@ -70,6 +83,9 @@ namespace AddressBook
                 Console.WriteLine("File does not exist");
             }
         }
+        /// <summary>
+        /// Read contacts from .csv file
+        /// </summary>
         public void ReadFromCSV()
         {
             if (FileExitsts(csvPath))
@@ -99,6 +115,10 @@ namespace AddressBook
                 Console.WriteLine("File Does Not Exist");
             }
         }
+        /// <summary>
+        /// Write contacts in address book to a json file
+        /// </summary>
+        /// <param name="contactList"></param>
         public void WriteToJsonFile(List<Contacts> contactList)
         {
             if (FileExitsts(jsonPath))
@@ -112,6 +132,9 @@ namespace AddressBook
             else
                 Console.WriteLine("File Does Not Exist");
         }
+        /// <summary>
+        /// Read contacts from json file
+        /// </summary>
         public void ReadFromJsonFile()
         {
             if (FileExitsts(jsonPath))
@@ -138,10 +161,18 @@ namespace AddressBook
             else
                 Console.WriteLine("File Does Not Exist");
         }
+        /// <summary>
+        /// Clear a file
+        /// </summary>
         public void ClearFile()
         {
             File.WriteAllText(path, string.Empty);
         }
+        /// <summary>
+        /// Check if the file exits
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>Returns true if the file exits at a given path or else returns false</returns>
         public bool FileExitsts(string filePath)
         {
             if (File.Exists(filePath))
