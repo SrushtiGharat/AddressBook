@@ -14,10 +14,6 @@ namespace AddressBook
         public string ZipCode { get; set; }
         public string PhoneNo { get; set; }
         public string EMail { get; set; }
-
-
-
-
         public Contacts()
         {
             FirstName = "";
@@ -42,7 +38,7 @@ namespace AddressBook
         }
         public override string ToString()
         {
-            return "Name :" + FirstName + " " + LastName + "\nAddress :" + Address +" \nCity :"+City+"  State :"+State+"   ZipCode :" + ZipCode + "\nPhone No :" + PhoneNo + "   Email :" + EMail;
+            return "Name :" + FirstName + " " + LastName + "\nAddress :" + Address + " \nCity :" + City + "  State :" + State + "   ZipCode :" + ZipCode + "\nPhone No :" + PhoneNo + "   Email :" + EMail;
         }
     }
 }

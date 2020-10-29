@@ -8,6 +8,7 @@ namespace AddressBook
 {
     class MultipleAddressBooks
     {
+
         /// <summary>
         ///Defining variables and collections used
         /// </summary>
@@ -16,6 +17,7 @@ namespace AddressBook
         public Dictionary<string, List<Contacts>> ContactByState;
         List<string> cities;
         List<string> states;
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -34,11 +36,10 @@ namespace AddressBook
         /// <param name="name"></param>
         public void AddAddressBook(string name)
         {
-            Address_Book addressBook = new Address_Book();
-            if (addressBooksCollection.ContainsKey(name)==false)
+            if (addressBooksCollection.ContainsKey(name) == false)
             {
+                Address_Book addressBook = new Address_Book();
                 addressBooksCollection.Add(name, addressBook);
-                Console.WriteLine("Address Book Added Successfully");
             }
             else
             {
@@ -53,9 +54,9 @@ namespace AddressBook
         /// <returns>Address_Book object</returns>
         public Address_Book GetAddressBook(string name)
         {
-            if (addressBooksCollection.ContainsKey(name))
+            if (this.addressBooksCollection.ContainsKey(name))
             {
-                return addressBooksCollection[name];
+                return this.addressBooksCollection[name];
             }
             return null;
         }
@@ -140,7 +141,7 @@ namespace AddressBook
             {
                 foreach (Contacts contact in ContactByCity[city])
                 {
-                    contact.ToString();
+                    Console.WriteLine(contact.ToString());
                 }
             }
             else
@@ -158,7 +159,7 @@ namespace AddressBook
             {
                 foreach (Contacts contact in ContactByState[state])
                 {
-                    contact.ToString();
+                    Console.WriteLine(contact.ToString());
                 }
             }
             else

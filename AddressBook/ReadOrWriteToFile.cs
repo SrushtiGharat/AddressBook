@@ -12,43 +12,30 @@ namespace AddressBook
 {
     class ReadOrWriteToFile
     {
-        string path = @"C:\Users\Gharat\source\repos\AddressBook\Address Book Contacts.txt";
-        string csvPath = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookContacts.csv";
-        string jsonPath = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookDetails.json";
-
         /// <summary>
         /// Write contacts in address book to a txt file
         /// </summary>
-        /// <param name="addressBookName"></param>
         /// <param name="contactList"></param>
-        public void WriteToFile(string addressBookName,List<Contacts> contactList)
+        /// <param name="path"></param>
+        public void WriteToFile(List<Contacts> contactList, string path)
         {
-            if (FileExitsts(path))
+            using (StreamWriter sr = File.AppendText(path))
             {
                 int count = 0;
-
-                using (StreamWriter sr = File.AppendText(path))
+                foreach (Contacts c in contactList)
                 {
-                    sr.WriteLine(addressBookName + ":");
-                    foreach (Contacts c in contactList)
-                    {
-                        sr.WriteLine(++count + " " + c.ToString() + "\n");
+                    sr.WriteLine(++count + " " + c.ToString() + "\n");
 
-                    }
-                    sr.Close();
                 }
-                
-            }
-            else
-            {
-                Console.WriteLine("File Does Not Exist");
+                sr.Close();
             }
 
         }
+
         /// <summary>
         /// Read contacts from txt file
         /// </summary>
-        public void ReadFromFile()
+        public void ReadFromFile(string path)
         {
             if (FileExitsts(path))
             {
@@ -67,26 +54,26 @@ namespace AddressBook
         /// Write contacts in address book to a .csv file
         /// </summary>
         /// <param name="contactList"></param>
-        public void WriteToCSV(List<Contacts> contactList)
+        /// <param name="csvPath"></param>
+        public void WriteToCSV(List<Contacts> contactList, string csvPath)
         {
-            if (FileExitsts(csvPath))
+            if (FileExitsts(csvPath) == false)
             {
-                using (var writer = new StreamWriter(csvPath))
-                using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                {
-                    csvExport.WriteRecords(contactList);
-                }
-                
+                File.Create(csvPath).Close();
             }
-            else
+
+            using (var writer = new StreamWriter(csvPath))
+            using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                Console.WriteLine("File does not exist");
+                csvExport.WriteRecords(contactList);
             }
+
         }
         /// <summary>
         /// Read contacts from .csv file
         /// </summary>
-        public void ReadFromCSV()
+        /// <param name="csvPath"></param>
+        public void ReadFromCSV(string csvPath)
         {
             if (FileExitsts(csvPath))
             {
@@ -94,7 +81,7 @@ namespace AddressBook
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
                     var records = csv.GetRecords<Contacts>().ToList();
-                    
+
                     foreach (Contacts contacts in records)
                     {
                         Console.Write("\t" + contacts.FirstName);
@@ -119,23 +106,25 @@ namespace AddressBook
         /// Write contacts in address book to a json file
         /// </summary>
         /// <param name="contactList"></param>
-        public void WriteToJsonFile(List<Contacts> contactList)
+        /// <param name="jsonPath"></param>
+        public void WriteToJsonFile(List<Contacts> contactList, string jsonPath)
         {
-            if (FileExitsts(jsonPath))
+            if (FileExitsts(jsonPath) == false)
             {
-                using (StreamWriter r = new StreamWriter(jsonPath))
-                {
-                    string json = JsonConvert.SerializeObject(contactList);
-                    r.WriteLine(json);
-                }
+                File.Create(jsonPath).Close();
             }
-            else
-                Console.WriteLine("File Does Not Exist");
+            using (StreamWriter r = new StreamWriter(jsonPath))
+            {
+                string json = JsonConvert.SerializeObject(contactList);
+                r.WriteLine(json);
+            }
+
         }
         /// <summary>
         /// Read contacts from json file
         /// </summary>
-        public void ReadFromJsonFile()
+        /// <param name="jsonPath"></param>
+        public void ReadFromJsonFile(string jsonPath)
         {
             if (FileExitsts(jsonPath))
             {
@@ -161,13 +150,7 @@ namespace AddressBook
             else
                 Console.WriteLine("File Does Not Exist");
         }
-        /// <summary>
-        /// Clear a file
-        /// </summary>
-        public void ClearFile()
-        {
-            File.WriteAllText(path, string.Empty);
-        }
+
         /// <summary>
         /// Check if the file exits
         /// </summary>
@@ -178,6 +161,13 @@ namespace AddressBook
             if (File.Exists(filePath))
                 return true;
             return false;
+        }
+        /// <summary>
+        /// Clear a file
+        /// </summary>
+        public void ClearFile(string path)
+        {
+            File.WriteAllText(path, string.Empty);
         }
     }
 }

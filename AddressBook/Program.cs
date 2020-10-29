@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-
+using System.IO;
 namespace AddressBook
 {
 
@@ -15,36 +15,41 @@ namespace AddressBook
         {
 
             int choice;
-            string addBookName = "";
+            string addBookName;
 
             MultipleAddressBooks multipleAddressBooks = new MultipleAddressBooks();
             OperationOnAddressBook operation = new OperationOnAddressBook();
+            LoadAddressBooks load = new LoadAddressBooks();
             Address_Book addressBook = null;
-            
+
             Console.WriteLine("Welcome to Address Book Program");
+            Console.WriteLine("Loading Address Books............");
+            load.LoadExistingAddressBooks(multipleAddressBooks);
+
+
             while (true)
             {
                 Console.WriteLine("------------------------------------------------------------------------");
                 Console.WriteLine("1.Add Address Book\n2.Edit Or Add Contact in Address Book\n3.View Persons By City\n4.View Persons By State\n5.Count By City\n6.Count By State\n7.Exit");
                 Console.WriteLine("------------------------------------------------------------------------");
                 choice = Convert.ToInt32(Console.ReadLine());
-               
-                switch(choice)
+
+                switch (choice)
                 {
                     case 1:
                         Console.WriteLine("Enter name of Address Book");
                         addBookName = Console.ReadLine();
                         multipleAddressBooks.AddAddressBook(addBookName);
-                                              
+
                         break;
                     case 2:
                         Console.WriteLine("Enter name of Address Book");
                         addBookName = Console.ReadLine();
                         addressBook = multipleAddressBooks.GetAddressBook(addBookName);
-                        
+
                         if (addressBook != null)
                         {
-                            operation.EditAddOrDeleteContact(addressBook,addBookName);
+                            operation.EditAddOrDeleteContact(addressBook, addBookName);
 
                         }
                         else
@@ -68,7 +73,7 @@ namespace AddressBook
                         break;
                     case 5:
                         multipleAddressBooks.SetContactByCityDictionary();
-                        foreach(var contactByCity in multipleAddressBooks.ContactByCity)
+                        foreach (var contactByCity in multipleAddressBooks.ContactByCity)
                         {
                             Console.WriteLine("City :" + contactByCity.Key + "   Count :" + contactByCity.Value.Count);
 
@@ -81,7 +86,7 @@ namespace AddressBook
                             Console.WriteLine("State :" + contactByState.Key + "   Count :" + contactByState.Value.Count);
 
                         }
-                        
+
                         break;
 
                     case 7:
@@ -91,7 +96,7 @@ namespace AddressBook
                     default:
                         Console.WriteLine("Invalid Choice");
                         break;
-                } 
+                }
 
             }
         }

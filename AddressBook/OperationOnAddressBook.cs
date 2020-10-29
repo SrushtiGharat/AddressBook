@@ -11,17 +11,20 @@ namespace AddressBook
         /// </summary>
         /// <param name="addressBook"></param>
         /// <param name="addressBookName"></param>
-        public void EditAddOrDeleteContact(Address_Book addressBook,string addressBookName)
+        public void EditAddOrDeleteContact(Address_Book addressBook, string addressBookName)
         {
             string[] name;
             int choice = 0;
             string[] details;
             bool flag = true;
+            string path = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookFiles\" + addressBookName + ".txt";
+            string csvPath = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookFiles\" + addressBookName + ".csv";
+            string jsonPath = @"C:\Users\Gharat\source\repos\AddressBook\AddressBookFiles\" + addressBookName + ".json";
             ReadOrWriteToFile rw = new ReadOrWriteToFile();
             while (flag)
             {
                 Console.WriteLine("------------------------------------------------------------------------");
-                Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Sort By Name\n5.Sort By City\n6.Sort By State\n7.Sort By ZipCode\n8.Write To File\n9.Read from File\n10.Exit");
+                Console.WriteLine("1.Add Contact\n2.Edit Contact\n3.Remove a contact\n4.Sort By Name\n5.Sort By City\n6.Sort By State\n7.Sort By ZipCode\n8.Read from file\n9.Save changes\n10.Exit");
                 Console.WriteLine("------------------------------------------------------------------------");
                 choice = Convert.ToInt32(Console.ReadLine());
 
@@ -80,21 +83,17 @@ namespace AddressBook
                         addressBook.SortByZipCode();
                         break;
                     case 8:
-                        rw.ClearFile();
-                        rw.WriteToFile(addressBookName,addressBook.contactList);
-                        rw.WriteToCSV(addressBook.contactList);
-                        rw.WriteToJsonFile(addressBook.contactList);
-                        Console.WriteLine("Written to file successfully");
+                        rw.ReadFromFile(path);
+                        rw.ReadFromCSV(csvPath);
+                        rw.ReadFromJsonFile(jsonPath);
                         break;
                     case 9:
-                        Console.WriteLine("From text file :");
-                        rw.ReadFromFile();
-                        Console.WriteLine("From csv file :");
-                        rw.ReadFromCSV();
-                        Console.WriteLine("From json file :");
-                        rw.ReadFromJsonFile();
+                        rw.ClearFile(path);
+                        rw.WriteToFile(addressBook.contactList, path);
+                        rw.WriteToCSV(addressBook.contactList, csvPath);
+                        rw.WriteToJsonFile(addressBook.contactList, jsonPath);
+                        Console.WriteLine("Saved to file successfully");
                         break;
-
                     case 10:
                         flag = false;
                         break;

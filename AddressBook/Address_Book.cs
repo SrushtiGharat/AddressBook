@@ -18,7 +18,7 @@ namespace AddressBook
         public Address_Book()
         {
             contactList = new List<Contacts>();
-            
+
         }
         /// <summary>
         /// Add a new Contact to Address Book
@@ -66,7 +66,7 @@ namespace AddressBook
                     c.ZipCode = zipCode;
                     c.PhoneNo = phoneNo;
                     c.EMail = eMail;
-                   
+
                     return;
                 }
             }
@@ -76,14 +76,14 @@ namespace AddressBook
         /// </summary>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
-        public void RemoveContact(string firstName,string lastName)
+        public void RemoveContact(string firstName, string lastName)
         {
             foreach (Contacts c in contactList)
             {
                 if (c.FirstName.Equals(firstName) && c.LastName.Equals(lastName))
                 {
                     contactList.Remove(c);
-                    
+
                     return;
                 }
             }
@@ -96,8 +96,7 @@ namespace AddressBook
         /// <returns>Returns true if present else false</returns>
         public bool CheckName(string firstName, string lastName)
         {
-            
-            foreach(Contacts contact in contactList.FindAll(e => e.FirstName.Equals(firstName) && e.LastName.Equals(lastName)))
+            foreach (Contacts contact in contactList.FindAll(e => e.FirstName.Equals(firstName) && e.LastName.Equals(lastName)))
             {
                 return true;
             }
@@ -111,9 +110,9 @@ namespace AddressBook
         public List<Contacts> GetPersonByCityOrState(string cityOrState)
         {
             List<Contacts> contact = new List<Contacts>();
-            foreach(Contacts c in contactList.FindAll(e => e.City.Equals(cityOrState) || e.State.Equals(cityOrState)))
+            foreach (Contacts c in contactList.FindAll(e => e.City.Equals(cityOrState) || e.State.Equals(cityOrState)))
             {
-                    contact.Add(c);
+                contact.Add(c);
             }
             return contact;
         }
@@ -122,12 +121,12 @@ namespace AddressBook
         /// </summary>
         public void SortByName()
         {
-            contactList.Sort((contact1,contact2)=>contact1.FirstName.CompareTo(contact2.FirstName));
-            foreach(Contacts c in contactList)
+            contactList.Sort((contact1, contact2) => contact1.FirstName.CompareTo(contact2.FirstName));
+            foreach (Contacts c in contactList)
             {
                 Console.WriteLine(c.ToString());
             }
-            
+
         }
         /// <summary>
         /// Sort the contacts in address book by city
